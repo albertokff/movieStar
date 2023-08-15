@@ -25,7 +25,22 @@
             if ($password === $confirmpassword) {
 
                 if ($userDao->findByEmail($email) === false) {
-                    echo "Nenhum usuário foi encontrado!";
+                    
+                    $user = new User();
+
+                    $userToken = $user->generateToken();
+                    $finalPassword = $user->generatePassword($password);
+
+                    $user->name = $name;
+                    $user->lastname = $lastname;
+                    $user->email = $email;
+                    $user->password = $finalPassword;
+                    $user->token = $userToken;
+
+                    $auth = true;
+
+                    $userDao->create($user, $auth);
+
                 } else {
                     $message->setMessage("E-mail já está sendo utilizado por outro usuário. Tente outro!", "error", "back");
                 }
