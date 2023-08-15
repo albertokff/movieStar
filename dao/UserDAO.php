@@ -93,6 +93,27 @@
 
         public function authenticateUser($email, $password) {
 
+            $user = $this->findByEmail($email);
+
+            if ($user) {
+                if (password_verify($password, $user->password)) {
+
+                    $token = $user->generateToken();
+
+                    $this->setTokenToSession($token);
+
+                    $user->token = $token;
+
+                    $this->update($user);
+
+                    return true;
+
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
         }
 
         public function findByEmail($email) {
