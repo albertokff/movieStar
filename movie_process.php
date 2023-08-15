@@ -9,6 +9,7 @@
 
     $message = new Message($BASE_URL);
     $userDao = new UserDAO($conn, $BASE_URL);
+    $movieDao = new MovieDAO($conn, $BASE_URL);
 
     $type = filter_input(INPUT_POST, "type");
 
@@ -31,6 +32,7 @@
             $movie->trailer = $trailer;
             $movie->category = $category;
             $movie->length = $length;
+            $movie->users_id = $userData->id;
 
             if(isset($_FILES["image"]) && !empty($_FILES["image"]["tmp_name"])) {
              
