@@ -65,6 +65,21 @@
             $message->setMessage("Atenção! Campos de título, descrição e categoria são obrigatórios.", "error", "back");
         }
 
+    } else if ($type === "delete") {   
+        $id = filter_input(INPUT_POST, "id");
+        $movie = $movieDao->findById($id);
+
+        if ($movie) {
+            if ($movie->users_id === $userData->id) {
+                $movieDao->destroy($movie->id);
+            } else {
+                $message->setMessage("Informações Inválidas!", "error", "index.php");
+            }
+        } else {
+            $message->setMessage("Informações Inválidas!", "error", "index.php");
+        }
+
     } else {
         $message->setMessage("Informações Inválidas!", "error", "index.php");
     }
+
