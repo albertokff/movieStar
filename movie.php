@@ -32,12 +32,12 @@
         if ($userData->id === $movie->users_id) {
             $userOwnsMovie = true;
         }
+
+        $alreadyReviewed = $reviewDao->hasAlreadyReviewed($id, $userData->id);
     }
 
     $movieReviews = $reviewDao->getMoviesReview($id);
-
-    $alreadyReviewed = false;
-
+   
 ?>
 
 <div id="main-container" class="container-fluid">
