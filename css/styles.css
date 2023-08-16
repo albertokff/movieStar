@@ -260,7 +260,7 @@
 }
 
 #movies-dashboard .table {
-    color: #FFF;
+    color: #000;
 }
 
 #movies-dashboard .table th {
@@ -321,6 +321,8 @@
     color: #DC3545;
     text-decoration: none;
 }
+
+
 
 /* Footer */
 
